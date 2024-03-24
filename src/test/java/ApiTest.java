@@ -1,40 +1,29 @@
-import com.df.mybatis.binding.MapperRegistry;
+import com.df.mybatis.io.Resources;
 import com.df.mybatis.session.SqlSession;
 import com.df.mybatis.session.SqlSessionFactory;
-import com.df.mybatis.session.defaults.DefaultSqlSessionFactory;
-import com.df.mybatis.test.dao.ISchoolDao;
+import com.df.mybatis.session.SqlSessionFactoryBuilder;
 import com.df.mybatis.test.dao.IUserDao;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.Reader;
 
 public class ApiTest {
 
     private Logger logger = LoggerFactory.getLogger(ApiTest.class);
 
     @Test
-    public void test_MapperProxyFactory() {
-        // 1. 注册 Mapper
-        MapperRegistry registry = new MapperRegistry();
-        registry.addMappers("com.df.mybatis.test.dao");
+    public void testA() throws IOException {
 
-        // 2. 从 SqlSession 工厂获取 Session
-        SqlSessionFactory sqlSessionFactory = new DefaultSqlSessionFactory(registry);
+        Reader reader = Resources.getResourceAsReader("mybatis-config-datasource.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
         SqlSession sqlSession = sqlSessionFactory.openSession();
+        IUserDao iUserDao = sqlSession.getMapper(IUserDao.class);
 
-        // 3. 获取映射器代理对象
-        IUserDao userDao = sqlSession.getMapper(IUserDao.class);
-        ISchoolDao schoolDao = sqlSession.getMapper(ISchoolDao.class);
-
-        // 4. 测试验证
-        String res = userDao.queryUserName("10001");
-
-        // 4. 测试验证
-        String school = schoolDao.querySchoolName("10001");
-
-
-        logger.info("测试结果：{}", res);
-        logger.info("school测试结果：{}", school);
+        String res = iUserDao.queryUserInfoById("10001");
+        System.out.println(res);
     }
 
 }
