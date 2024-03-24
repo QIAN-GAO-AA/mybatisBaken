@@ -1,5 +1,7 @@
 package com.df.mybatis.binding;
 
+import com.df.mybatis.session.SqlSession;
+
 import java.lang.reflect.Proxy;
 import java.util.Map;
 
@@ -17,8 +19,8 @@ public class MapperProxyFactory<T> {
     // 第三个参数：动态代理方法在执行时，会调用第三个参数里面的invoke方法去执行
     // 方法返回的对象
     // Proxy.newProxyInstance代理的是接口
-//    @SuppressWarnings("unchecked")
-    public T newInstance(Map<String, String> sqlSession) {
+    @SuppressWarnings("unchecked")
+    public T newInstance(SqlSession sqlSession) {
         final MapperProxy<T> mapperProxy = new MapperProxy<>(sqlSession, mapperInterface);
         return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[]{mapperInterface}, mapperProxy);
     }
