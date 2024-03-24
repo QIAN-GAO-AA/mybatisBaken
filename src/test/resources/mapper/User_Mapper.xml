@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapper namespace="com.df.mybatis.test.dao.IUserDao">
-  <select id="queryUserInfoById" parameterType="java.lang.Long" resultType="df.middleware.mybatis.po.User">
+  <select id="queryUserInfoById" parameterType="java.lang.Long" resultType="com.df.mybatis.test.po.User">
     SELECT id, userId, userHead, createTime
     FROM user
     where id = #{id}

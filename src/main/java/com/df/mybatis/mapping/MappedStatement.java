@@ -1,39 +1,34 @@
 package com.df.mybatis.mapping;
 
 import com.df.mybatis.session.Configuration;
-import lombok.Data;
 
-import java.util.Map;
-
-// 映射语句类
-// sql信息记录对象,记录包括：SQL类型，SQL语句，入参类型，出参类型等
-@Data
+/**
+ * @Author df
+ * @Description: 映射语句类
+ * @Date 2024/2/7 12:59
+ */
 public class MappedStatement {
     private Configuration configuration;
     private String id;
     private SqlCommandType sqlCommandType;
+    private BoundSql boundSql;
 
+    MappedStatement() {
+        // constructor disabled
+    }
 
-    private String parameterType;
-    private String resultType;
-    private String sql;
-    private Map<Integer, String> parameter;
-
-    //public MappedStatement(){}
-
+    /**
+     * 建造者
+     */
     public static class Builder {
+
         private MappedStatement mappedStatement = new MappedStatement();
 
-        public Builder(Configuration configuration, String id, SqlCommandType sqlCommandType,
-                       String parameterType, String resultType, String sql, Map<Integer, String> parameter) {
+        public Builder(Configuration configuration, String id, SqlCommandType sqlCommandType, BoundSql boundSql ) {
             mappedStatement.configuration = configuration;
             mappedStatement.id = id;
             mappedStatement.sqlCommandType = sqlCommandType;
-
-            mappedStatement.parameterType = parameterType;
-            mappedStatement.resultType = resultType;
-            mappedStatement.sql = sql;
-            mappedStatement.parameter = parameter;
+            mappedStatement.boundSql = boundSql;
         }
 
         public MappedStatement build() {
@@ -41,7 +36,36 @@ public class MappedStatement {
             assert mappedStatement.id != null;
             return mappedStatement;
         }
+
     }
 
-    // 省略set.get
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public SqlCommandType getSqlCommandType() {
+        return sqlCommandType;
+    }
+
+    public void setSqlCommandType(SqlCommandType sqlCommandType) {
+        this.sqlCommandType = sqlCommandType;
+    }
+
+    public BoundSql getBoundSql() {
+        return boundSql;
+    }
+
+
 }

@@ -1,13 +1,25 @@
-package com.df.mybatis.binding;
+package com.df.mybatis.bingding;
 
-import cn.hutool.core.lang.ClassScanner;
+import com.df.mybatis.session.Configuration;
 import com.df.mybatis.session.SqlSession;
+import cn.hutool.core.lang.ClassScanner;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @Author df
+ * @Description: 映射器代理类
+ * @Date 2024/2/2 16:46
+ */
 public class MapperRegistry {
+
+    private Configuration config;
+
+    public MapperRegistry(Configuration config) {
+        this.config = config;
+    }
 
     /**
      * 存储代理器工厂容器
@@ -53,5 +65,3 @@ public class MapperRegistry {
     }
 
 }
-
-

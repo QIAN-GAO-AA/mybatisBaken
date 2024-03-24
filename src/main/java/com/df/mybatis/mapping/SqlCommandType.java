@@ -1,15 +1,31 @@
 package com.df.mybatis.mapping;
 
-// SQL指令类型
+/**
+ * @Author df
+ * @Description: SQL 指令类型
+ * @Date 2024/2/7 13:01
+ */
 public enum SqlCommandType {
-    // 未知
-    UNKNOW,
-    // 插入
+
+    /**
+     * 未知
+     */
+    UNKNOWN,
+    /**
+     * 插入
+     */
     INSERT,
-    // 更新
+    /**
+     * 更新
+     */
     UPDATE,
-    // 删除
+    /**
+     * 删除
+     */
     DELETE,
-    // 查找
+    /**
+     * 查找
+     */
     SELECT;
+
 }

@@ -5,9 +5,12 @@ import com.df.mybatis.session.defaults.DefaultSqlSessionFactory;
 
 import java.io.Reader;
 
-// mybatis的入口
+/**
+ * @Author df
+ * @Description: 构建SqlSessionFactory的工厂
+ * @Date 2024/2/7 13:13
+ */
 public class SqlSessionFactoryBuilder {
-
     public SqlSessionFactory build(Reader reader) {
         XMLConfigBuilder xmlConfigBuilder = new XMLConfigBuilder(reader);
         return build(xmlConfigBuilder.parse());
@@ -16,4 +19,6 @@ public class SqlSessionFactoryBuilder {
     public SqlSessionFactory build(Configuration config) {
         return new DefaultSqlSessionFactory(config);
     }
+
+
 }

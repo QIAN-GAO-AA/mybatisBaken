@@ -1,7 +1,11 @@
 package com.df.mybatis.session;
 
+/**
+ * @Author df
+ * @Description: SqlSession
+ * @Date 2024/2/2 16:34
+ */
 public interface SqlSession {
-
     /**
      * Retrieve a single row mapped from the statement key
      * 根据指定的SqlID获取一条记录的封装对象
@@ -10,7 +14,7 @@ public interface SqlSession {
      * @param statement sqlID
      * @return Mapped object 封装之后的对象
      */
-    <T> T selectOne(String statement);
+     <T> T selectOne(String statement);
 
     /**
      * Retrieve a single row mapped from the statement key and parameter.
@@ -22,7 +26,7 @@ public interface SqlSession {
      * @param parameter A parameter object to pass to the statement.
      * @return Mapped object
      */
-    <T> T selectOne(String statement, Object parameter);
+     <T> T selectOne(String statement, Object parameter);
 
     /**
      * Retrieves a mapper.
@@ -32,8 +36,7 @@ public interface SqlSession {
      * @param type Mapper interface class
      * @return a mapper bound to this SqlSession
      */
-    <T> T getMapper(Class<T> type);
+     <T> T getMapper(Class<T> type);
 
     Configuration getConfiguration();
-
 }
